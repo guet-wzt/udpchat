@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="899.0" prefWidth="937.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.network.udpchat.common.controller.ChatController">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false">
+               <graphic>
+                  <Label fx:id="logoutLabel" onMouseClicked="#logout" text="Log out" />
+               </graphic>
+            </Menu>
+        </menus>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </MenuBar>
+   </top>
+   <bottom>
+      <VBox prefHeight="240.0" prefWidth="937.0" BorderPane.alignment="CENTER">
+         <children>
+            <TextArea fx:id="input" prefHeight="192.0" prefWidth="937.0" promptText="请输入...">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </TextArea>
+            <HBox alignment="CENTER_RIGHT" prefHeight="73.0" prefWidth="941.0">
+               <children>
+                  <Button fx:id="send" mnemonicParsing="false" onAction="#toSend" prefHeight="35.0" prefWidth="82.0" style="-fx-background-color: DarkCyan;" text="发送(S)" textAlignment="CENTER" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="cancel" mnemonicParsing="false" onAction="#toCancel" prefHeight="35.0" prefWidth="82.0" text="取消(C)">
+                     <HBox.margin>
+                        <Insets left="50.0" right="50.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </bottom>
+   <left>
+      <VBox prefHeight="515.0" prefWidth="205.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="BASELINE_CENTER" prefHeight="52.0" prefWidth="205.0">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" minHeight="34.0" prefHeight="34.0" prefWidth="205.0" style="-fx-background-color: LightSlateGray;" text="FRIENDS" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <TextField fx:id="addFriTextField" prefHeight="34.0" prefWidth="180.0" promptText="输入用户名......">
+               <font>
+                  <Font size="17.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="2.0" />
+               </VBox.margin>
+            </TextField>
+            <Label fx:id="addFriendLabel" alignment="CENTER" minHeight="34.0" onMouseClicked="#addFriend" prefHeight="34.0" prefWidth="205.0" style="-fx-background-color: SlateGrey;" text="加好友" textFill="WHITE">
+               <font>
+                  <Font size="17.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="2.0" />
+               </VBox.margin>
+            </Label>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label fx:id="showUsersLable" alignment="CENTER" minHeight="34.0" onMouseClicked="#showUsers" prefWidth="205.0" style="-fx-background-color: SlateGrey;" text="我的好友≡" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="2.0" top="2.0" />
+               </VBox.margin>
+            </HBox>
+            <ScrollPane prefHeight="593.0" prefWidth="205.0">
+               <content>
+                  <VBox fx:id="userListVBox" alignment="TOP_CENTER" prefHeight="2000.0" spacing="5.0" />
+               </content>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </ScrollPane>
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="recieverNameLabel" alignment="CENTER" minHeight="34.0" prefHeight="69.0" prefWidth="732.0" style="-fx-background-color: LightBlue;" text="USER" textAlignment="CENTER">
+               <font>
+                  <Font size="19.0" />
+               </font></Label>
+            <ScrollPane fx:id="msgDisplyPane" prefHeight="900.0" prefWidth="857.0" />
+         </children>
+      </VBox>
+   </center>
+   <right>
+      <VBox alignment="TOP_CENTER" prefHeight="627.0" prefWidth="161.0" style="-fx-background-color: LightGray;" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" minHeight="34.0" prefHeight="34.0" prefWidth="161.0" style="-fx-background-color: DarkCyan;" text="MORE" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <Label fx:id="myGroupLabel" alignment="CENTER" onMouseClicked="#searchMyGroup" prefHeight="35.0" prefWidth="161.0" style="-fx-background-color: DarkSeaGreen;" text="我的群聊" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <ScrollPane prefHeight="200.0" prefWidth="200.0">
+               <content>
+                  <VBox fx:id="groupVbox" alignment="TOP_CENTER" prefHeight="1000.0" spacing="4.0">
+                     <children>
+                        <Label fx:id="sendAllLabel" alignment="CENTER" onMouseClicked="#sendAll" prefHeight="34.0" prefWidth="142.0" style="-fx-background-color: lavender;" text="群发">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="4.0" />
+                           </VBox.margin>
+                        </Label>
+                     </children>
+                  </VBox>
+               </content>
+            </ScrollPane>
+            <TextField fx:id="groupNameTField" promptText="输入群名称......">
+               <font>
+                  <Font size="17.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="2.0" />
+               </VBox.margin>
+            </TextField>
+            <VBox alignment="TOP_CENTER" prefHeight="43.0" prefWidth="161.0">
+               <children>
+                  <Label fx:id="addGroupLabel" alignment="CENTER" contentDisplay="CENTER" minHeight="35.0" onMouseClicked="#addGroup" prefWidth="161.0" style="-fx-background-color: LightSeaGreen;" text="新建群聊+" textFill="WHITE">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="2.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label fx:id="choiceFriLabel" alignment="CENTER" minHeight="34.0" onMouseClicked="#choiceFriToGroup" prefHeight="34.0" prefWidth="161.0" style="-fx-background-color: LightSeaGreen;" text="选择好友≡" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="2.0" />
+                     </VBox.margin>
+                  </Label>
+               </children>
+            </VBox>
+            <ListView fx:id="friendListView" prefHeight="200.0" prefWidth="200.0" visible="false" />
+         </children>
+      </VBox>
+   </right>
+</BorderPane>

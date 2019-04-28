@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.network.udpchat.common.dao.UserGroupMapper" >
+  <resultMap id="BaseResultMap" type="com.network.udpchat.common.domain.UserGroup" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="group_name" property="groupName" jdbcType="VARCHAR" />
+    <result column="member_name" property="memberName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, username, group_name, member_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_group
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user_group
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.network.udpchat.common.domain.UserGroup" >
+    insert into user_group (id, username, group_name, 
+      member_name)
+    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{groupName,jdbcType=VARCHAR}, 
+      #{memberName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.network.udpchat.common.domain.UserGroup" useGeneratedKeys="true" keyProperty="id">
+    insert into user_group
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="groupName != null" >
+        group_name,
+      </if>
+      <if test="memberName != null" >
+        member_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="groupName != null" >
+        #{groupName,jdbcType=VARCHAR},
+      </if>
+      <if test="memberName != null" >
+        #{memberName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.network.udpchat.common.domain.UserGroup" >
+    update user_group
+    <set >
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="groupName != null" >
+        group_name = #{groupName,jdbcType=VARCHAR},
+      </if>
+      <if test="memberName != null" >
+        member_name = #{memberName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.network.udpchat.common.domain.UserGroup" >
+    update user_group
+    set username = #{username,jdbcType=VARCHAR},
+      group_name = #{groupName,jdbcType=VARCHAR},
+      member_name = #{memberName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select * from user_group
+  </select>
+</mapper>

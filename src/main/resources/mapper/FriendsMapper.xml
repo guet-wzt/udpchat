@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.network.udpchat.common.dao.FriendsMapper" >
+  <resultMap id="BaseResultMap" type="com.network.udpchat.common.domain.Friends" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="pos_friend" property="posFriend" jdbcType="VARCHAR" />
+    <result column="neg_friend" property="negFriend" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, pos_friend, neg_friend
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from friends
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from friends
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.network.udpchat.common.domain.Friends"  >
+    insert into friends (id,pos_friend, neg_friend )
+    values (#{id,jdbcType=INTEGER},#{posFriend,jdbcType=VARCHAR}, #{negFriend,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.network.udpchat.common.domain.Friends" useGeneratedKeys="true" keyProperty="id" >
+    insert into friends
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="posFriend != null" >
+        pos_friend,
+      </if>
+      <if test="negFriend != null" >
+        neg_friend,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="posFriend != null" >
+        #{posFriend,jdbcType=VARCHAR},
+      </if>
+      <if test="negFriend != null" >
+        #{negFriend,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.network.udpchat.common.domain.Friends" >
+    update friends
+    <set >
+      <if test="posFriend != null" >
+        pos_friend = #{posFriend,jdbcType=VARCHAR},
+      </if>
+      <if test="negFriend != null" >
+        neg_friend = #{negFriend,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.network.udpchat.common.domain.Friends" >
+    update friends
+    set pos_friend = #{posFriend,jdbcType=VARCHAR},
+      neg_friend = #{negFriend,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectFriendsList" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select * from friends where neg_friend = #{username,jdbcType=VARCHAR} or pos_friend = #{username,jdbcType=VARCHAR}
+  </select>
+</mapper>
